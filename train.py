@@ -76,6 +76,8 @@ chosen_model = input("Which model would you like to use? ")
 #Select the learning rate
 learning_rate = float(input("Enter learning rate: for example 0.003: "))
 
+#Set cuda chosen to no
+cuda_chosen = "no"
 
 #Build a feed forward network
 def Feed_Forward_Network(chosen_model, learning_rate):
@@ -143,7 +145,8 @@ print_every = 5
 for epoch in range(epochs):
     for images, labels in dataloaders_train:
         steps += 1
-        images, labels = images.to('cuda'), labels.to('cuda')
+        if (cuda_chosen == 'Yes'):
+            images, labels = images.to('cuda'), labels.to('cuda')
         
         optimizer.zero_grad()
         
@@ -164,7 +167,8 @@ for epoch in range(epochs):
             
             for images, labels in dataloaders_test:
             
-                images, labels = images.to('cuda'), labels.to('cuda')
+                if (cuda_chosen == 'Yes'):
+                    images, labels = images.to('cuda'), labels.to('cuda')
 
                 log_probabilities = model(images)
                 loss = criterion(log_probabilities, labels)
@@ -203,8 +207,9 @@ def calc_test_set_accuracy(dataloaders_test):
             accuracy = 0
 
             for images, labels in dataloaders_validation:
-
-                images, labels = images.to('cuda'), labels.to('cuda')
+                
+                if (cuda_chosen == 'Yes'):
+                    images, labels = images.to('cuda'), labels.to('cuda')
 
                 log_probabilities = model(images)
                 loss = criterion(log_probabilities, labels)
