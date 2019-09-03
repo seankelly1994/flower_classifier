@@ -9,7 +9,6 @@ from torch import optim
 import torch.nn.functional as F
 from torchvision import datasets, transforms, models
 import json
-import seaborn as sb
 import PIL
 from PIL import Image
 import argparse
@@ -17,7 +16,7 @@ from collections import OrderedDict
 from torch.autograd import Variable
 
 #Set the paths
-data_dir = 'flowers'
+data_dir = './assets/flower_data'
 
 train_dir = data_dir + '/train'
 test_dir = data_dir + '/test'
@@ -72,10 +71,10 @@ print("Choose between three models, select the learning rate and determine if yo
 print("You have three options for the models, vgg16, densenet121 and resnet50. Please use all smaller letters")
 
 #Choose the model
-chosen_model = input("Which model would you like to use?")
+chosen_model = input("Which model would you like to use? ")
 
 #Select the learning rate
-learning_rate = float(input("Enter learning rate: for example 0.003"))
+learning_rate = float(input("Enter learning rate: for example 0.003: "))
 
 
 #Build a feed forward network
@@ -93,7 +92,7 @@ def Feed_Forward_Network(chosen_model, learning_rate):
     if (learning_rate > 0.01):
         print("Woah easy there tiger! Lets go for something a little bit lower")
         print("Try again")
-        learning_rate = float(input("Enter learning rate: for example 0.003"))
+        learning_rate = float(input("Enter learning rate: for example 0.003: "))
     else:
         print("Great thanks!")
     
